@@ -27,10 +27,21 @@ function addTransactionToTable(transaction, index) {
     `;
 }
 
+function displayEmptyMessage() {
+    tableEl.innerHTML = `
+        <tr class="empty-message">
+            <td colspan="4">
+                <img src="./no-data1.png" alt="No data" style="height:250px;width:350px;display:block;margin:0 auto;">
+                <p style="color:red;text-align:center;font-weight:bold">No transactions yet</p>
+            </td>
+        </tr>
+    `;
+}
+
 function displayTransactions() {
     tableEl.innerHTML = '';
     if (transactions.length === 0) {
-        tableEl.innerHTML = '<tr><td colspan="4">No transactions yet</td></tr>';
+        displayEmptyMessage();
     } else {
         transactions.forEach((transaction, index) => {
             addTransactionToTable(transaction, index);
@@ -76,7 +87,7 @@ function exportTransactionsToPDF() {
 }
 
 document.getElementById('logoutBtn').addEventListener('click', () => {
-    window.location.href = 'index.html'; // Redirect to the login page
+    window.location.href = 'index.html'; 
 });
 formEl.addEventListener('submit', addTransaction);
 tableEl.addEventListener('click', e => {
@@ -87,4 +98,4 @@ tableEl.addEventListener('click', e => {
 });
 exportBtn.addEventListener('click', exportTransactionsToPDF);
 
-displayTransactions(); // Call this initially to show transactions on load
+displayTransactions(); 
